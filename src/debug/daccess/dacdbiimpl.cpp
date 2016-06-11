@@ -5238,6 +5238,11 @@ void DacDbiInterfaceImpl::Hijack(
     ctx.R1 = (DWORD)espRecord;
     ctx.R2 = (DWORD)reason;
     ctx.R3 = (DWORD)pData;
+#elif defined(_TARGET_ARM64_)
+    ctx.X0 = (DWORD)espContext;
+    ctx.X1 = (DWORD)espRecord;
+    ctx.X2 = (DWORD)reason;
+    ctx.X3 = (DWORD)pData;
 #else
     PORTABILITY_ASSERT("CordbThread::HijackForUnhandledException is not implemented on this platform.");
 #endif

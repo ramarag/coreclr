@@ -153,11 +153,29 @@ inline TADDR GetSP(const T_CONTEXT * context) {
     return TADDR(context->Sp);
 }
 
-inline PCODE GetLR(const T_CONTEXT * context) {
+inline TADDR GetLR(const T_CONTEXT * context) {
     LIMITED_METHOD_DAC_CONTRACT;
     return PCODE(context->Lr);
 }
 
+inline void SetLR( T_CONTEXT * context, TADDR eip) {
+    LIMITED_METHOD_DAC_CONTRACT;
+    context->Lr = eip;
+}
+
+inline TADDR GetReg(T_CONTEXT * context, int Regnum)
+{
+    LIMITED_METHOD_DAC_CONTRACT;
+    _ASSERTE(Regnum >= 0 && Regnum < 32 );
+     return context->X[Regnum];
+}
+
+inline void SetReg(T_CONTEXT * context,  int Regnum, PCODE RegContent)
+{
+    LIMITED_METHOD_DAC_CONTRACT;
+    _ASSERTE(Regnum >= 0 && Regnum <=28 );
+    context->X[Regnum] = RegContent;
+}
 extern "C" LPVOID __stdcall GetCurrentSP();
 
 inline void SetSP(T_CONTEXT *context, TADDR sp) {
@@ -174,6 +192,12 @@ inline TADDR GetFP(const T_CONTEXT * context)
 {
     LIMITED_METHOD_DAC_CONTRACT;
     return (TADDR)(context->Fp);
+}
+
+inline PCODE GetMem(PCODE ip)
+{
+    LIMITED_METHOD_DAC_CONTRACT;
+    return dac_cast<PCODE>(ip); //could fault 
 }
 
 #ifdef FEATURE_COMINTEROP
