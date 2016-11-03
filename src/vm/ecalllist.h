@@ -452,7 +452,7 @@ FCFuncStart(gCOMTypeHandleFuncs)
     FCFuncElement("IsComObject", RuntimeTypeHandle::IsComObject)
 #ifdef FEATURE_REMOTING        
     FCFuncElement("HasProxyAttribute", RuntimeTypeHandle::HasProxyAttribute)
-    FCFuncElement("IsContextful", RuntimeTypeHandle::IsContextful)
+	FCFuncElement("IsContextful", RuntimeTypeHandle::IsContextful)
 #endif    
     FCFuncElement("IsValueType", RuntimeTypeHandle::IsValueType)
     FCFuncElement("IsInterface", RuntimeTypeHandle::IsInterface)
@@ -1043,10 +1043,11 @@ FCFuncStart(gTypeNameBuilder)
     QCFuncElement("Clear", TypeNameBuilder::_Clear)
 FCFuncEnd()
 
-#ifndef FEATURE_CORECLR
+
 FCFuncStart(gSafeTypeNameParserHandle)
     QCFuncElement("_ReleaseTypeNameParser", TypeName::QReleaseTypeNameParser)
 FCFuncEnd()
+
 
 FCFuncStart(gTypeNameParser)
     QCFuncElement("_CreateTypeNameParser",  TypeName::QCreateTypeNameParser)
@@ -1055,7 +1056,6 @@ FCFuncStart(gTypeNameParser)
     QCFuncElement("_GetModifiers",          TypeName::QGetModifiers)
     QCFuncElement("_GetAssemblyName",       TypeName::QGetAssemblyName)
 FCFuncEnd()
-#endif //!FEATURE_CORECLR
 
 #ifdef FEATURE_CAS_POLICY
 FCFuncStart(gPEFileFuncs)
@@ -2395,9 +2395,8 @@ FCClassElement("SafePEFileHandle", "Microsoft.Win32.SafeHandles", gPEFileFuncs)
 #ifdef FEATURE_CRYPTO
 FCClassElement("SafeProvHandle", "System.Security.Cryptography", gSafeProvHandleFuncs)
 #endif
-#ifndef FEATURE_CORECLR
 FCClassElement("SafeTypeNameParserHandle", "System", gSafeTypeNameParserHandle)
-#endif //!FEATURE_CORECLR
+
 #if defined(FEATURE_IMPERSONATION) || defined(FEATURE_COMPRESSEDSTACK)
 FCClassElement("SecurityContext", "System.Security", gCOMSecurityContextFuncs)
 #endif // defined(FEATURE_IMPERSONATION) || defined(FEATURE_COMPRESSEDSTACK)
@@ -2438,9 +2437,7 @@ FCClassElement("TypeLibConverter", "System.Runtime.InteropServices", gTypeLibCon
 #endif
 FCClassElement("TypeLoadException", "System", gTypeLoadExceptionFuncs)
 FCClassElement("TypeNameBuilder", "System.Reflection.Emit", gTypeNameBuilder)
-#ifndef FEATURE_CORECLR
 FCClassElement("TypeNameParser", "System", gTypeNameParser)
-#endif //!FEATURE_CORECLR
 FCClassElement("TypedReference", "System", gTypedReferenceFuncs)
 FCClassElement("URLString", "System.Security.Util", gCOMUrlStringFuncs)
 #ifdef FEATURE_COMINTEROP
